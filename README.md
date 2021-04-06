@@ -1,2 +1,2 @@
 # AEDS
-Trabalhos sobre Algoritmos e Estruturas de Dados em C
+Estudo e Trabalhos sobre Algoritmos e Estruturas de Dados em C
