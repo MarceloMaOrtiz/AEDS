@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ArvoreBinaria.h"
+#include "arvoreBinaria.h"
 
 //  Árvore Binária
 //   - Tipo especial de árvore

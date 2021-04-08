@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ArvoreBinaria_busca.h"
+#include "arvoreBinaria_busca.h"
 
 //  Árvore Binária de Busca
 //   Propriedades
