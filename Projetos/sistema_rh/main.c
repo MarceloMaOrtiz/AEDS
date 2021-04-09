@@ -31,10 +31,29 @@ int main(){
     No* arvoreNome;
     No* arvoreCPF;
 
+    // Para declarar dessa forma foi necessário inserir a estrutura no .h
+    Info infoNo; // Utilizado para armazenar informações de um único nó
+
     int opcao;
+
+    int cpf;
+    char nome[50];
+    char profissao[30];
+
+    int verifica_insercao;
+    int verifica_remocao_nome;
+    int verifica_remocao_cpf;
+    int verifica_remocao;
 
     arvoreNome = criaArvore();
     arvoreCPF = criaArvore();
+
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo", 5555, "Estudante");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Wallace", 3333, "Barbeiro");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Bob", 8888, "Programador");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Sama", 9999, "Hero");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Daniel", 1111, "Mec");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Ravena", 7777, "Instagran");
 
     do{
         system("clear"); // Linux
@@ -61,63 +80,146 @@ int main(){
 
         switch(opcao){
             case 1:
+                system("clear"); // Linux
                 printf(" #############  CADASTRO DE FUNCIONÁRIO  #############\n\n");
-                
-                int verifica_insercao;
-
-                int cpf;
-                char nome[50];
-                char profissao[30];
 
                 // Leitura dos dados
-                printf(" NOME: ");
+                printf("\tNome: ");
                 fgets(nome, 50, stdin);
                 clean_fgets(nome);
 
-                printf(" CPF: ");
+                printf("\tCPF: ");
                 scanf("%d", &cpf);
                 fflush_stdin();
 
-                printf(" PROFISSÃO: ");
+                printf("\tProfissão: ");
                 fgets(profissao, 30, stdin);
                 clean_fgets(profissao);
 
-                printf("NOME: %s\n", nome);
-                printf("PROFISSAO: %s\n", profissao);
-                printf("LEN: %ld\n", strlen(profissao));
-                printf("\nCPF = %d\n\n", cpf);
-
-
                 // Adiciona funcionário em ambas as árvores
-                // Retornando: 1 = Sucesso, -1 = Já existe, 0 = Error
+                // Retornando: 1 = Sucesso, -1 = Já existe nome, -2 = Já existe CPF, 0 = Error
                 verifica_insercao = adicionaFuncionario(arvoreNome, arvoreCPF, nome, cpf, profissao);
-
-                printf("\nInsersao: %d\n", verifica_insercao);
                 
+                if(verifica_insercao == 1)
+                    printf("\n\tFuncionário adicionado com sucesso.\n\n");
+                else if(verifica_insercao == -1){
+                    printf("\n\tNome já está sendo utilizado\n");
+                    printf("\tFuncionário não foi adicionado.\n\n");
+                }
+                else if(verifica_insercao == -2){
+                    printf("\n\tCPF já está sendo utilizado\n");
+                    printf("\tFuncionário não foi adicionado.\n\n");
+                }
+                else{
+                    printf("\tFuncionário não foi adicionado.\n\n");
+                }
+
                 break;
             case 2:
-                printf("OPCAO 2\n\n");
+                system("clear"); // Linux
+                printf(" #########  REMOÇÃO DE FUNCIONÁRIO PELO NOME  #########\n\n");
+
+                printf("\tNome: ");
+                fgets(nome, 50, stdin);
+                clean_fgets(nome);
+
+                infoNo = buscaNoNome(arvoreNome, nome);
+ 
+                verifica_remocao_nome = removeNoArvoreNome(arvoreNome, nome);
+
+                if(verifica_remocao_nome == 1)
+                    verifica_remocao_cpf = removeNoArvoreCPF(arvoreCPF, infoNo.CPF);
+
+                if(verifica_remocao_nome == 1 && verifica_remocao_cpf == 1)
+                    printf("\n\tRemoção do %s feita com sucesso.\n\n", nome);
+                else
+                    printf("\n\tRemoção do usuário %s não ocorreu com sucesso.\n\n", nome);
+
                 break;
             case 3:
-                printf("OPCAO 3\n\n");
+                system("clear"); // Linux
+                printf(" #########  REMOÇÃO DE FUNCIONÁRIO PELO CPF  #########\n\n");
+
+                printf("\tCPF: ");
+                scanf("%d", &cpf);
+                fflush_stdin();
+
+                infoNo = buscaNoCPF(arvoreCPF, cpf);
+
+                verifica_remocao_cpf = removeNoArvoreCPF(arvoreCPF, cpf);
+
+                if(verifica_remocao_cpf == 1)
+                    verifica_remocao_nome = removeNoArvoreNome(arvoreNome, infoNo.Nome);
+
+                if(verifica_remocao_nome == 1 && verifica_remocao_cpf == 1)
+                    printf("\n\tRemoção do CPF %d feita com sucesso.\n\n", cpf);
+                else
+                    printf("\n\tRemoção do CPF %d não ocorreu com sucesso.\n\n", cpf);
+
                 break;
             case 4:
-                printf("OPCAO 4\n\n");
+                system("clear"); // Linux
+                printf(" ##########  BUSCA DE FUNCIONÁRIO PELO NOME  ##########\n\n");
+
+                printf("\tNome: ");
+                fgets(nome, 50, stdin);
+                clean_fgets(nome);
+
+                infoNo = buscaNoNome(arvoreNome, nome);
+
+                if(infoNo.CPF != -1){
+                    printf("\n\tNome: %s\n", infoNo.Nome);
+                    printf("\tCPF: %d\n", infoNo.CPF);
+                    printf("\tProfissão: %s\n\n", infoNo.Profissao);
+                }
+                else
+                    printf("\n\tFuncionário não encontrado.\n\n");
+
                 break;
             case 5:
-                printf("OPCAO 5\n\n");
+                system("clear"); // Linux
+                printf(" ##########  BUSCA DE FUNCIONÁRIO PELO CPF  ##########\n\n");
+
+                printf("\tCPF: ");
+                scanf("%d", &cpf);
+                fflush_stdin();
+
+                infoNo = buscaNoCPF(arvoreCPF, cpf);
+
+                if(infoNo.CPF != -1){
+                    printf("\n\tNome: %s\n", infoNo.Nome);
+                    printf("\tCPF: %d\n", infoNo.CPF);
+                    printf("\tProfissão: %s\n\n", infoNo.Profissao);
+                }
+                else
+                    printf("\n\tFuncionário não encontrado.\n\n");
+
                 break;
             case 6:
-                printf("OPCAO 6\n\n");
+                system("clear"); // Linux
+                printf(" ###################  FUNCIONÁRIOS  ###################\n\n");
+
+                exibirEmOrdemArvore(arvoreNome);
+
                 break;
             case 7:
-                printf("OPCAO 7\n\n");
+
+                verifica_remocao = removerFuncionarios(arvoreNome, arvoreCPF);
+
+                if(verifica_remocao == 1)
+                    printf("\n\tTodos funcionários removido com sucesso.\n\n");
+                else
+                    printf("\n\tÁrvore já está vazia.\n\n");
+
                 break;
             case 8:
-                printf("OPCAO 8\n\n");
+                system("clear"); // Linux
+                printf("\n\tObrigado por utilizar o sistema.\n");
+                printf("\n\tEspero que tenha gostado.\n");
+                printf("\n\tElielson Batista Oliveira.\n\n");
                 break;
             default:
-                printf("OPCAO INVALIDA\n\n");
+                printf("\n\tOpção inválida.\n\n");
                 break;
         }
 
