@@ -14,30 +14,29 @@ No* criaArvore(){
 }
 
 // Função responsável por percorrer a árvore liberando os nós
-void liberaNO(struct No_Est* no){
+void liberaNO(struct No_Est* no, int limpaInfo){
     if(no == NULL)
         return;
-    liberaNO(no->esq); // Chama recursivamente o nó da esquerda
-    liberaNO(no->dir); // Chama recursivamente o nó da direita
-    // PONTO DE ATENÇÃO
-    // if(no->info != NULL)
-    //     free(no->info); // Libera as informações do funcionário
+    liberaNO(no->esq, limpaInfo); // Chama recursivamente o nó da esquerda
+    liberaNO(no->dir, limpaInfo); // Chama recursivamente o nó da direita
+    if(limpaInfo == 1)
+        free(no->info); // Libera as informações do funcionário
     free(no); // Libera o Nó
     no = NULL;
 }
 
 // Libera toda a memória alocada da árvore
-void liberaArvore(No* raiz){
+void liberaArvore(No* raiz, int limpaInfo){
     if(raiz == NULL)
         return;
-    liberaNO(*raiz);
-    free(raiz);
+    liberaNO(*raiz, limpaInfo); // Enviando o nó raiz para a função
+    free(raiz); // Libera a raiz após liberar todos os nós
 }
 
 // Cria funcionário
 Info* infoCria(char nome[], int cpf, char profissao[]){
 
-    Info* info = (Info*)malloc(sizeof(Info));
+    Info* info = (Info*)malloc(sizeof(Info)); // Aloca memória para o novo Funcionário
     if(info != NULL){
         strcpy(info->Nome, nome);
         info->CPF = cpf;
@@ -143,59 +142,66 @@ int adicionaFuncionario(No* raiz_nome, No* raiz_cpf, char nome[], int cpf, char 
         verifica = insereArvoreCPF(raiz_cpf, info);
         if(verifica != 1)
             // Caso haja falha na inserção da Arvore CPF é necessário corrigir a árvore Nome
-            removeNoArvoreNome(raiz_nome, info->Nome);
+            removeNoArvoreNome(raiz_nome, info->Nome, 1);
     }
+    else
+        free(info); // Libera a memória alocada
 
     return verifica;
 }
 
 // Função responsável por tratar os 3 tipos de remoção
-struct No_Est* removeNoAtual(struct No_Est* atual){
+struct No_Est* removeNoAtual(struct No_Est* atual, int limpaInfo){
     struct No_Est *no1, *no2;
-    // Casos com 0 ou 1 nó
+    // Casos com 0 ou 1 nó filhos
     if(atual->esq == NULL){
         no2 = atual->dir;
+        if(limpaInfo == 1)
+            free(atual->info);
         free(atual);
         return no2;
     }
     // Procura filho mais a direita na sub-árvore da esquerda
-    no1 = atual;
-    no2 = atual->esq;
-    while(no2->dir != NULL){
+    no1 = atual; // Utilizado para evitar uma situação específica onde o nó mais a direita possui um filho
+    no2 = atual->esq; // associa a sub-árvore da esquerda
+    while(no2->dir != NULL){ // Procura o nó mais a direita
         no1 = no2;
         no2 = no2->dir;
     }
-    // Copia o filho mais a direita a sub-árvore da esquerda
-    if(no1 != atual){
-        no1->dir = no2->esq;
-        no2->esq = atual->esq;
+    if(no1 != atual){ // Caso o no1 não seja o nó removido é necessário fazer uma correção
+        no1->dir = no2->esq; // Como o nó mais a direita será removido, o nó anterior irá apontar para o nó da esquerda do no2
+        no2->esq = atual->esq; // Novo nó aponta para sub-árvore da esquerda do nó removido
     }
-    no2->dir = atual->dir;
-    free(atual);
-    return no2;
+    no2->dir = atual->dir; // Corrige o apontamento do novo posicionamento do nó em relação a sub-arvore da direita
+    if(limpaInfo == 1)
+        free(atual->info);
+    free(atual); 
+    return no2; // Retorna o novo nó que será linkado ao nó anterior ao removido
 }
 
 // Função Responsável por buscar o nó a ser removido baseado no nome
-int removeNoArvoreNome(No* raiz, char nome[]){
+int removeNoArvoreNome(No* raiz, char nome[], int limpaInfo){
     if(raiz == NULL)
         return 0;
-    struct No_Est* ant = NULL;
-    struct No_Est* atual = *raiz;
-    while(atual != NULL){
-        if(strcmp(nome, atual->info->Nome) == 0){
-            if(atual == *raiz)
-                *raiz = removeNoAtual(atual);
+    struct No_Est* ant = NULL; // Para corrigir o apontamento dos nós
+    struct No_Est* atual = *raiz; // Nó que será removido
+    while(atual != NULL){ // Percorre a árvore até o fim ou encontrar o nó que possue o mesmo nome
+        if(strcmp(nome, atual->info->Nome) == 0){ // Checa se o nome da busca é igual o nome presente no nó
+            if(atual == *raiz) // Caso o nó seja raiz, motivo pelo qual foi utilizado * no typedef
+                *raiz = removeNoAtual(atual, limpaInfo); // Envia o nó para ser removido e recebe como retorno o nó correto
             else{
-                if(ant->esq == atual)
-                    ant->esq = removeNoAtual(atual);
+                // Verifica se o nó atual é da esquerda ou da direita em relação ao anterior para manter o link da árvore
+                if(ant->esq == atual) 
+                    ant->esq = removeNoAtual(atual, limpaInfo); // Envia o nó para ser removido e recebe como retorno o novo apontamento
                 else
-                    ant->dir = removeNoAtual(atual);
+                    ant->dir = removeNoAtual(atual, limpaInfo);
             }
             return 1;
         }
-        ant = atual;
+        ant = atual; // Atualiza o nó anterior, já que o nó atual é diferente do da busca
+        // Retorna um valor < 0 caso a primeira letra diferente entre a 1ª palavra e a 2ª for menor
         if(strcmp(nome, atual->info->Nome) < 0)
-            atual = atual->esq;
+            atual = atual->esq; // Vai para esquerda, atualizando o nó que será removido
         else
             atual = atual->dir;
     }
@@ -203,7 +209,8 @@ int removeNoArvoreNome(No* raiz, char nome[]){
 }
 
 // Função Responsável por buscar o nó a ser removido baseado no cpf
-int removeNoArvoreCPF(No* raiz, int cpf){
+// Segue a mesma lógica do removeNoArvoreNome, a diferença é que a verificação é entre inteiros
+int removeNoArvoreCPF(No* raiz, int cpf, int limpaInfo){
     if(raiz == NULL)
         return 0;
     struct No_Est* ant = NULL;
@@ -213,12 +220,12 @@ int removeNoArvoreCPF(No* raiz, int cpf){
         cpf_atual = atual->info->CPF;
         if(cpf == cpf_atual){
             if(atual == *raiz)
-                *raiz = removeNoAtual(atual);
+                *raiz = removeNoAtual(atual, limpaInfo);
             else{
                 if(ant->esq == atual)
-                    ant->esq = removeNoAtual(atual);
+                    ant->esq = removeNoAtual(atual, limpaInfo);
                 else
-                    ant->dir = removeNoAtual(atual);
+                    ant->dir = removeNoAtual(atual, limpaInfo);
             }
             return 1;
         }
@@ -283,15 +290,17 @@ void exibirEmOrdemArvore(No* raiz){
 }
 
 // Limpa árvore
-int limpaArvore(No* raiz){
+int limpaArvore(No* raiz, int limpaInfo){
     if(raiz == NULL)
         return 0;
     if(*raiz == NULL)
         return 0;
     if(*raiz != NULL){
-        limpaArvore(&((*raiz)->esq));
-        limpaArvore(&((*raiz)->dir));
-        free(*raiz);
+        limpaArvore(&((*raiz)->esq), limpaInfo);
+        limpaArvore(&((*raiz)->dir), limpaInfo);
+        if(limpaInfo == 1) // Só libera a Info quando for liberar a última árvore
+            free((*raiz)->info); // Libera as infos
+        free(*raiz); // Libera o conteúdo da raiz, no caso o nó de fato, mas mantém a raiz existindo
     }
     return 1;
 }
@@ -299,10 +308,10 @@ int limpaArvore(No* raiz){
 // Remove todos os funcionários
 int removerFuncionarios(No* raiz_nome, No* raiz_cpf){
     int verifica = 0;
-    verifica = limpaArvore(raiz_nome);
-    *raiz_nome = NULL;
+    verifica = limpaArvore(raiz_nome, 0);
+    *raiz_nome = NULL; // Seta o apontamento da raiz para NULL
     if(verifica == 1){
-        verifica = limpaArvore(raiz_cpf);
+        verifica = limpaArvore(raiz_cpf, 1);
         *raiz_cpf = NULL;
     }
     return verifica;

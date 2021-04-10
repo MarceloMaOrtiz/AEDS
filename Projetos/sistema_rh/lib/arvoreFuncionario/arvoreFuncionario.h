@@ -20,16 +20,16 @@ typedef struct No_Est* No;
 No* criaArvore();
 
 // Destroi a árvore
-void liberaArvore(No* raiz);
+void liberaArvore(No* raiz, int limpaInfo);
 
 // Aloca os funcionários na memória e insere em ambas as árvores
 int adicionaFuncionario(No* raiz_nome, No* raiz_cpf, char nome[], int cpf, char profissao[]);
 
 // Remove o nó da Árvore utilizando nome como busca principal
-int removeNoArvoreNome(No* raiz, char nome[]);
+int removeNoArvoreNome(No* raiz, char nome[], int limpaInfo);
 
 // Remove o nó da Árvore utilizando cpf como busca principal
-int removeNoArvoreCPF(No* raiz, int cpf);
+int removeNoArvoreCPF(No* raiz, int cpf, int limpaInfo);
 
 // Retorna a Info de um Nó utilizando o Nome como busca
 Info buscaNoNome(No* raiz, char nome[]);

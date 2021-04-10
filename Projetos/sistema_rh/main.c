@@ -7,7 +7,7 @@
 // Função para pausar o programa
 void pause(){
     printf("Pressione qualquer tecla para continuar...");
-    scanf("%*c"); // lê um tecla qualquer e descarta o valor dela
+    scanf("%*c"); // lê uma tecla qualquer e descarta o valor dela
 }
 
 // Função auxiliar para limpar o buffer do teclado
@@ -34,17 +34,20 @@ int main(){
     // Para declarar dessa forma foi necessário inserir a estrutura no .h
     Info infoNo; // Utilizado para armazenar informações de um único nó
 
-    int opcao;
+    int opcao; // Controla as opções do menu
 
-    int cpf;
+    // Variáveis que serão utilizadas armazenamento auxiliar das variáveis
+    int cpf; 
     char nome[50];
     char profissao[30];
 
+    // Verificações das funções para controlar o compartamento do programa de acordo com os retornos
     int verifica_insercao;
     int verifica_remocao_nome;
     int verifica_remocao_cpf;
     int verifica_remocao;
 
+    // Inicialização das árvores
     arvoreNome = criaArvore();
     arvoreCPF = criaArvore();
 
@@ -56,6 +59,7 @@ int main(){
     adicionaFuncionario(arvoreNome, arvoreCPF, "Ravena", 7777, "Instagran");
 
     do{
+        // system("cls"); // Windows
         system("clear"); // Linux
         printf(" ####################################################\n");
         printf(" ####  Trabalho Algoritmo e Estrutura de Dados  #####\n");
@@ -80,6 +84,7 @@ int main(){
 
         switch(opcao){
             case 1:
+                // system("cls"); // Windows
                 system("clear"); // Linux
                 printf(" #############  CADASTRO DE FUNCIONÁRIO  #############\n\n");
 
@@ -116,6 +121,7 @@ int main(){
 
                 break;
             case 2:
+                // system("cls"); // Windows
                 system("clear"); // Linux
                 printf(" #########  REMOÇÃO DE FUNCIONÁRIO PELO NOME  #########\n\n");
 
@@ -125,10 +131,10 @@ int main(){
 
                 infoNo = buscaNoNome(arvoreNome, nome);
  
-                verifica_remocao_nome = removeNoArvoreNome(arvoreNome, nome);
+                verifica_remocao_nome = removeNoArvoreNome(arvoreNome, nome, 0); // 0 é para não liberar memória da Info
 
                 if(verifica_remocao_nome == 1)
-                    verifica_remocao_cpf = removeNoArvoreCPF(arvoreCPF, infoNo.CPF);
+                    verifica_remocao_cpf = removeNoArvoreCPF(arvoreCPF, infoNo.CPF, 1); // 1 é para liberar memória da Info
 
                 if(verifica_remocao_nome == 1 && verifica_remocao_cpf == 1)
                     printf("\n\tRemoção do %s feita com sucesso.\n\n", nome);
@@ -137,6 +143,7 @@ int main(){
 
                 break;
             case 3:
+                // system("cls"); // Windows
                 system("clear"); // Linux
                 printf(" #########  REMOÇÃO DE FUNCIONÁRIO PELO CPF  #########\n\n");
 
@@ -146,10 +153,10 @@ int main(){
 
                 infoNo = buscaNoCPF(arvoreCPF, cpf);
 
-                verifica_remocao_cpf = removeNoArvoreCPF(arvoreCPF, cpf);
+                verifica_remocao_cpf = removeNoArvoreCPF(arvoreCPF, cpf, 0); // 0 é para não liberar memória da Info
 
                 if(verifica_remocao_cpf == 1)
-                    verifica_remocao_nome = removeNoArvoreNome(arvoreNome, infoNo.Nome);
+                    verifica_remocao_nome = removeNoArvoreNome(arvoreNome, infoNo.Nome, 1); // 1 é para liberar memória da Info
 
                 if(verifica_remocao_nome == 1 && verifica_remocao_cpf == 1)
                     printf("\n\tRemoção do CPF %d feita com sucesso.\n\n", cpf);
@@ -158,6 +165,7 @@ int main(){
 
                 break;
             case 4:
+                // system("cls"); // Windows
                 system("clear"); // Linux
                 printf(" ##########  BUSCA DE FUNCIONÁRIO PELO NOME  ##########\n\n");
 
@@ -177,6 +185,7 @@ int main(){
 
                 break;
             case 5:
+                // system("cls"); // Windows
                 system("clear"); // Linux
                 printf(" ##########  BUSCA DE FUNCIONÁRIO PELO CPF  ##########\n\n");
 
@@ -196,6 +205,7 @@ int main(){
 
                 break;
             case 6:
+                // system("cls"); // Windows
                 system("clear"); // Linux
                 printf(" ###################  FUNCIONÁRIOS  ###################\n\n");
 
@@ -207,12 +217,13 @@ int main(){
                 verifica_remocao = removerFuncionarios(arvoreNome, arvoreCPF);
 
                 if(verifica_remocao == 1)
-                    printf("\n\tTodos funcionários removido com sucesso.\n\n");
+                    printf("\n\tTodos funcionários removidos com sucesso.\n\n");
                 else
                     printf("\n\tÁrvore já está vazia.\n\n");
 
                 break;
             case 8:
+                // system("cls"); // Windows
                 system("clear"); // Linux
                 printf("\n\tObrigado por utilizar o sistema.\n");
                 printf("\n\tEspero que tenha gostado.\n");
@@ -227,8 +238,8 @@ int main(){
 
     }while(opcao != 8);
     
-    liberaArvore(arvoreCPF);
-    liberaArvore(arvoreNome);
+    liberaArvore(arvoreNome, 0); // 0 não limpará a info do funcionário
+    liberaArvore(arvoreCPF, 1); // 1 limpará a info do funcionário
 
     return 0;
 }
