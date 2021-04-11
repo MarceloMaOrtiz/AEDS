@@ -137,7 +137,7 @@ int adicionaFuncionario(No* raiz_nome, No* raiz_cpf, char nome[], int cpf, char 
 
     if(verifica == 1){
         // Insere Funcionário na arvore ordenada por CPF
-        // verific utilizado para controlar o resultado da inserção
+        // verifica utilizado para controlar o resultado da inserção
         verifica = 0;
         verifica = insereArvoreCPF(raiz_cpf, info);
         if(verifica != 1)
@@ -188,11 +188,13 @@ int removeNoArvoreNome(No* raiz, char nome[], int limpaInfo){
     while(atual != NULL){ // Percorre a árvore até o fim ou encontrar o nó que possue o mesmo nome
         if(strcmp(nome, atual->info->Nome) == 0){ // Checa se o nome da busca é igual o nome presente no nó
             if(atual == *raiz) // Caso o nó seja raiz, motivo pelo qual foi utilizado * no typedef
-                *raiz = removeNoAtual(atual, limpaInfo); // Envia o nó para ser removido e recebe como retorno o nó correto
+                // Envia o nó para ser removido e recebe como retorno o nó correto
+                *raiz = removeNoAtual(atual, limpaInfo);
             else{
-                // Verifica se o nó atual é da esquerda ou da direita em relação ao anterior para manter o link da árvore
-                if(ant->esq == atual) 
-                    ant->esq = removeNoAtual(atual, limpaInfo); // Envia o nó para ser removido e recebe como retorno o novo apontamento
+        // Verifica se o nó atual é da esquerda ou da direita em relação ao anterior para manter o link da árvore
+                if(ant->esq == atual)
+                    // Envia o nó para ser removido e recebe como retorno o novo apontamento
+                    ant->esq = removeNoAtual(atual, limpaInfo);
                 else
                     ant->dir = removeNoAtual(atual, limpaInfo);
             }

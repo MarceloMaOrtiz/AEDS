@@ -51,13 +51,6 @@ int main(){
     arvoreNome = criaArvore();
     arvoreCPF = criaArvore();
 
-    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo", 5555, "Estudante");
-    adicionaFuncionario(arvoreNome, arvoreCPF, "Wallace", 3333, "Barbeiro");
-    adicionaFuncionario(arvoreNome, arvoreCPF, "Bob", 8888, "Programador");
-    adicionaFuncionario(arvoreNome, arvoreCPF, "Sama", 9999, "Hero");
-    adicionaFuncionario(arvoreNome, arvoreCPF, "Daniel", 1111, "Mec");
-    adicionaFuncionario(arvoreNome, arvoreCPF, "Ravena", 7777, "Instagran");
-
     do{
         // system("cls"); // Windows
         system("clear"); // Linux
