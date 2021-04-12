@@ -132,7 +132,7 @@ int main(){
                 if(verifica_remocao_nome == 1 && verifica_remocao_cpf == 1)
                     printf("\n\tRemoção do %s feita com sucesso.\n\n", nome);
                 else
-                    printf("\n\tRemoção do usuário %s não ocorreu com sucesso.\n\n", nome);
+                    printf("\n\tFuncionário %s não encontrado.\n\n", nome);
 
                 break;
             case 3:
@@ -154,7 +154,7 @@ int main(){
                 if(verifica_remocao_nome == 1 && verifica_remocao_cpf == 1)
                     printf("\n\tRemoção do CPF %d feita com sucesso.\n\n", cpf);
                 else
-                    printf("\n\tRemoção do CPF %d não ocorreu com sucesso.\n\n", cpf);
+                    printf("\n\tCPF %d não encontrado.\n\n", cpf);
 
                 break;
             case 4:
