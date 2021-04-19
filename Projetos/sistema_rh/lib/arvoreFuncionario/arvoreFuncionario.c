@@ -318,3 +318,16 @@ int removerFuncionarios(No* raiz_nome, No* raiz_cpf){
     }
     return verifica;
 }
+
+void inverteArvore(No* raiz){
+    if(raiz == NULL)
+        return;
+    if(*raiz == NULL)
+        return;
+    struct No_Est *no_aux;
+    no_aux = (*raiz)->esq;
+    (*raiz)->esq = (*raiz)->dir;
+    (*raiz)->dir = no_aux;
+    inverteArvore(&((*raiz)->esq));
+    inverteArvore(&((*raiz)->dir));
+}

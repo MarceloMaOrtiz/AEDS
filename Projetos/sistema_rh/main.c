@@ -30,6 +30,7 @@ int main(){
 
     No* arvoreNome;
     No* arvoreCPF;
+    No* arvoreEspelho;
 
     // Para declarar dessa forma foi necessário inserir a estrutura no .h
     Info infoNo; // Utilizado para armazenar informações de um único nó
@@ -50,6 +51,16 @@ int main(){
     // Inicialização das árvores
     arvoreNome = criaArvore();
     arvoreCPF = criaArvore();
+    arvoreEspelho = criaArvore();
+
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo1", 1, "Nao");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo2", 2, "Nao");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo3", 3, "Nao");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo4", 4, "Nao");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo5", 5, "Nao");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo6", 6, "Nao");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo7", 7, "Nao");
+    adicionaFuncionario(arvoreNome, arvoreCPF, "Marcelo8", 8, "Nao");
 
     do{
         // system("cls"); // Windows
@@ -70,6 +81,7 @@ int main(){
         printf(" 6- Exibir os dados de todos os funcionários ordenados pelo nome\n");
         printf(" 7- Remover todos os funcionários\n");
         printf(" 8- Sair\n\n");
+        printf(" 9- Bonus - Inverte Arvore\n\n");
 
         printf("\tOpção: ");
         scanf("%d", &opcao);
@@ -222,6 +234,15 @@ int main(){
                 printf("\n\tEspero que tenha gostado.\n");
                 printf("\n\tElielson Batista Oliveira.\n\n");
                 break;
+            case 9:
+                system("clear"); // Linux
+
+                printf(" ##############  FUNCIONÁRIOS INVERTIDOS  ##############\n\n");
+
+                inverteArvore(arvoreNome);
+                exibirEmOrdemArvore(arvoreNome);
+                break;
+
             default:
                 printf("\n\tOpção inválida.\n\n");
                 break;

@@ -42,3 +42,6 @@ void exibirEmOrdemArvore(No* raiz);
 
 // Remove todos os funcionários
 int removerFuncionarios(No* raiz_nome, No* raiz_cpf);
+
+// Inverte determinada arvore
+void inverteArvore(No* raiz);
