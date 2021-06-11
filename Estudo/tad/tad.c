@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "Ponto.h"
 
-// Estruturas de Dados: Trata-se de um relacionamento lógico entre tipos de dados 
+// Estruturas de Dados: Trata-se de um relacionamento lógico entre tipos de dados incluindo
 // Manipulações dos Dados:
 //  - Criação da Estrutura
 //  - Inclusão de um elemento
