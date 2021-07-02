@@ -1,5 +1,5 @@
-#include "stdlib.h"
 #include "stdio.h"
+#include "stdlib.h"
 #include "Lista.h"
 
 int main(){
@@ -19,11 +19,9 @@ int main(){
     insere_lista(lista2, d4);
     insere_lista(lista2, d5);
     insere_lista(lista2, d6);
-
     imprime_lista(lista1);
     inssub(lista1, 1, lista2, 0, 2);
     imprime_lista(lista1);
-
     libera_lista(lista1);
     libera_lista(lista2);
     return 0;

@@ -4,7 +4,7 @@
 
 struct lista {
     int qtd;
-    struct no nos[MAX];
+    struct dado dados[MAX];
 };
 
 Lista* cria_lista(){
@@ -19,12 +19,12 @@ int lista_cheia(Lista* li){
     return (li->qtd == MAX);
 }
 
-int insere_lista(Lista* li, struct no no){
+int insere_lista(Lista* li, struct dado d){
     if(li == NULL)
         return 0;
     if(lista_cheia(li))
         return 0;
-    li->nos[li->qtd] = no;
+    li->dados[li->qtd] = d;
     li->qtd++;
     return 1;
 }
@@ -34,10 +34,10 @@ int troca_elementos(Lista* li, int i, int j){
         return 0;
     if(i >= li->qtd || j >= li->qtd)
         return 0;
-    struct no aux;
-    aux = li->nos[i];
-    li->nos[i] = li->nos[j];
-    li->nos[j] = aux;
+    struct dado aux;
+    aux = li->dados[i];
+    li->dados[i] = li->dados[j];
+    li->dados[j] = aux;
     return 1;
 }
 
@@ -47,7 +47,7 @@ void imprime_lista(Lista* li){
     int i = 0;
     printf("\n");
     while(i < li->qtd){
-        printf("%d - ", li->nos[i].num);
+        printf("%d - ", li->dados[i].num);
         i++;
     }
 }

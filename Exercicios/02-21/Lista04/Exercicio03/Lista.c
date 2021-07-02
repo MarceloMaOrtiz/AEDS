@@ -4,7 +4,7 @@
 
 struct lista {
     int qtd;
-    struct no nos[MAX];
+    struct dado dados[MAX];
 };
 
 Lista* cria_lista(){
@@ -19,21 +19,31 @@ int lista_cheia(Lista* li){
     return (li->qtd == MAX);
 }
 
-int insere_lista(Lista* li, struct no no){
+int insere_lista(Lista* li, struct dado d){
     if(li == NULL)
         return 0;
     if(lista_cheia(li))
         return 0;
-    li->nos[li->qtd] = no;
+    li->dados[li->qtd] = d;
     li->qtd++;
     return 1;
 }
 
-int insere_lista(Lista* li, struct no no, int ind){
+int insere_lista_indice(Lista* li, struct dado d, int ind){
+    if(li == NULL)
+        return 0;
+    struct dado atual, pos;
+    atual = li->dados[ind];
     int i = ind;
     while(i < li->qtd){
-        struct no aux = li->nos[i];
+        pos = li->dados[i+1];
+        li->dados[i+1] = atual;
+        atual = pos;
+        i++;
     }
+    li->dados[ind] = d;
+    li->qtd++;
+    return 1;
 }
 
 void inssub(Lista *l1, int i1, Lista *l2, int i2, int len){
@@ -43,7 +53,8 @@ void inssub(Lista *l1, int i1, Lista *l2, int i2, int len){
         return;
     int i = 0;
     while(i < len){
-        
+        struct dado dado2 = l2->dados[i2+i];
+        insere_lista_indice(l1, dado2, i1+i);
         i++;
     }
 }
@@ -54,7 +65,7 @@ void imprime_lista(Lista* li){
     int i = 0;
     printf("\n");
     while(i < li->qtd){
-        printf("%d - ", li->nos[i].num);
+        printf("%d - ", li->dados[i].num);
         i++;
     }
 }
