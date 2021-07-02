@@ -4,6 +4,7 @@
 
 #include "stdio.h"
 #include "stdlib.h"
+#include "aluno.h"
 #include "ListaSequencial.h"
 
 struct lista_sequencial {
@@ -36,7 +37,7 @@ int insere_lista_sequencial_final(ListaSequencial* li, struct aluno al){
 }
 
 int insere_lista_sequencial_inicio(ListaSequencial* li, struct aluno al){
-    if( li == NULL)
+    if(li == NULL)
         return 0;
     if(lista_cheia(li))
         return 0;
@@ -62,7 +63,6 @@ int insere_lista_sequencial_ordenada(ListaSequencial* li, struct aluno al){
     li->qtd++;
     return 1;
 }
-
 
 int remove_lista_sequencial_final(ListaSequencial* li){
     if(li == NULL)
@@ -120,6 +120,6 @@ int consulta_lista_sequencial_mat(ListaSequencial* li, int mat, struct aluno *al
     return 1;
 }
 
-void libera_lista(ListaSequencial* li){
+void libera_lista_sequencial(ListaSequencial* li){
     free(li);
 }

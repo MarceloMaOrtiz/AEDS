@@ -4,13 +4,9 @@
     // - Ponteiro "lista"
     // - Tamanho do vetor usado na lista
 
+
 #define MAX 100
 
-struct aluno {
-    int matricula;
-    char nome[30];
-    float n1, n2, n3;
-};
 typedef struct lista_sequencial ListaSequencial;
 
 ListaSequencial* cria_lista_sequencial();
@@ -31,4 +27,4 @@ int consulta_lista_sequencial_pos(ListaSequencial* li, int pos, struct aluno *al
 
 int consulta_lista_sequencial_mat(ListaSequencial* li, int mat, struct aluno *al);
 
-void libera_lista(ListaSequencial* li);
+void libera_lista_sequencial(ListaSequencial* li);
