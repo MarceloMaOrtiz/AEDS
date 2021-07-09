@@ -1,16 +1,12 @@
-struct TipoItem{
-    char chave;
-};
-
 typedef struct elemento* Pilha;
 
 Pilha* cria_pilha();
 
-int insere_pilha(Pilha *pi, struct TipoItem item);
+int insere_pilha(Pilha *pi, char c);
 
 int remove_pilha(Pilha *pi);
 
-int remove_item_pilha(Pilha *pi, struct TipoItem item);
+Pilha* inverte_letras(Pilha *pi);
 
 void imprime_pilha(Pilha *pi);
 

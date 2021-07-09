@@ -3,7 +3,7 @@
 #include "Pilha.h"
 
 struct elemento{
-    struct TipoItem item;
+    char letra;
     struct elemento *prox;
 };
 typedef struct elemento Elem;
@@ -15,13 +15,13 @@ Pilha* cria_pilha(){
     return pi;
 }
 
-int insere_pilha(Pilha *pi, struct TipoItem item){
+int insere_pilha(Pilha *pi, char c){
     if(pi == NULL)
         return 0;
     Elem* elem = (Elem*)malloc(sizeof(Elem));
     if(elem == NULL)
         return 0;
-    elem->item = item;
+    elem->letra = c;
     elem->prox = (*pi);
     *pi = elem;
     return 1;
@@ -38,35 +38,47 @@ int remove_pilha(Pilha *pi){
     return 1;
 }
 
-int remove_item_pilha(Pilha *pi, struct TipoItem item){
-    Pilha *aux = cria_pilha();
-    Elem *elem;
+Pilha* inverte_letras(Pilha *pi){
+    Pilha *resultado = cria_pilha();
+    Pilha *aux_min = cria_pilha();
+    Elem *elem, *elem_min;
+    remove_pilha(pi);
+    remove_pilha(pi);
     elem = *pi;
-    while(elem->item.chave != item.chave){
-        insere_pilha(aux, elem->item);
+    while(elem != NULL){
+        if(elem->letra == ' '){
+            elem_min = *aux_min;
+            while(elem_min != NULL){
+                insere_pilha(resultado, elem_min->letra);
+                remove_pilha(aux_min);
+                elem_min = *aux_min;
+            }
+            insere_pilha(resultado, ' ');
+        }else{
+            insere_pilha(aux_min, elem->letra);
+        }
         remove_pilha(pi);
         elem = *pi;
     }
-    remove_pilha(pi);
-    elem = *aux;
-    while((*aux) != NULL){
-        insere_pilha(pi, elem->item);
-        remove_pilha(aux);
-        elem = *aux;
+    elem_min = *aux_min;
+    while(elem_min != NULL){
+        insere_pilha(resultado, elem_min->letra);
+        remove_pilha(aux_min);
+        elem_min = *aux_min;
     }
-    libera_pilha(aux);
-    return 1;
+    libera_pilha(aux_min);
+    return resultado;
 }
 
 void imprime_pilha(Pilha *pi){
     Elem *elem;
     elem = *pi;
-    printf("\n\tPilha\n[ ");
+    printf("\n\tPilha\n");
     while(elem != NULL){
-        printf("%c, ", elem->item.chave);
+        printf("%c", elem->letra);
         elem = elem->prox;
     }
-    printf("]\n");
+    printf("\n");
 }
 
 void libera_pilha(Pilha *pi){

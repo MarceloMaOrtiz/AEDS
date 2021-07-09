@@ -3,7 +3,7 @@
 #include "Pilha.h"
 
 struct elemento{
-    struct TipoItem item;
+    int num;
     struct elemento *prox;
 };
 typedef struct elemento Elem;
@@ -15,13 +15,13 @@ Pilha* cria_pilha(){
     return pi;
 }
 
-int insere_pilha(Pilha *pi, struct TipoItem item){
+int insere_pilha(Pilha *pi, int num){
     if(pi == NULL)
         return 0;
     Elem* elem = (Elem*)malloc(sizeof(Elem));
     if(elem == NULL)
         return 0;
-    elem->item = item;
+    elem->num = num;
     elem->prox = (*pi);
     *pi = elem;
     return 1;
@@ -38,24 +38,16 @@ int remove_pilha(Pilha *pi){
     return 1;
 }
 
-int remove_item_pilha(Pilha *pi, struct TipoItem item){
+Pilha* inverte(Pilha *pi){
     Pilha *aux = cria_pilha();
     Elem *elem;
     elem = *pi;
-    while(elem->item.chave != item.chave){
-        insere_pilha(aux, elem->item);
+    while(elem != NULL){
+        insere_pilha(aux, elem->num);
         remove_pilha(pi);
         elem = *pi;
     }
-    remove_pilha(pi);
-    elem = *aux;
-    while((*aux) != NULL){
-        insere_pilha(pi, elem->item);
-        remove_pilha(aux);
-        elem = *aux;
-    }
-    libera_pilha(aux);
-    return 1;
+    return aux;
 }
 
 void imprime_pilha(Pilha *pi){
@@ -63,7 +55,7 @@ void imprime_pilha(Pilha *pi){
     elem = *pi;
     printf("\n\tPilha\n[ ");
     while(elem != NULL){
-        printf("%c, ", elem->item.chave);
+        printf("%d, ", elem->num);
         elem = elem->prox;
     }
     printf("]\n");

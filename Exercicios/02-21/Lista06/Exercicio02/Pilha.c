@@ -102,7 +102,7 @@ int processa_entradas(struct entrada entradas[], int tam){
             printf("\n\tCarro %s saiu! Manobras: %d\n", entradas[i].car.placa, manobras);
         }
     }
-    free(pilha);
+    libera_pilha(pilha);
 }
 
 void libera_pilha(Pilha *pi){
