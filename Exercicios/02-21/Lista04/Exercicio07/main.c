@@ -1,3 +1,8 @@
+// Considere listas implementadas por ponteiros – lista encadeada. Escreva um procedimento inssub (l1, i1,
+// l2, i2, len) para inserir os elementos da lista l2, começando no elemento de índice i2 e continuando por
+// len elementos na lista l1, começando na posição i1. Nenhum elemento da lista l1 deverá ser removido ou
+// substituído. A lista l2 deve permanecer inalterada. Faça um pequeno programa para testar seu procedimento.
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "Lista.h"

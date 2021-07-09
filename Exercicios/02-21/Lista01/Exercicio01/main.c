@@ -1,3 +1,20 @@
+// Uma indústria faz a folha mensal de pagamentos de seus empregados baseada em uma tabela que contém os
+// dados dos funcionários:
+
+// Fazer um algoritmo que processe a tabela e emita, para cada funcionário, seu contracheque cujo formato é
+// dado a seguir:
+//     NUMERO DE INSCRICAO:
+//     NOME:
+//     SALARIO HORAS NORMAIS:
+//     SALARIO HORAS EXTRAS:
+//     DEDUCAO INSS :
+//     SALARIO LIQUIDO:
+// O salário de referência deverá ser lido previamente. O salário referente às horas extras é calculado
+// acrescentando 30% ao salário-hora normal. O desconto do INSS é de 11% do salário bruto (salário
+// correspondente às horas normais trabalhadas + salário correspondente às horas extras). Para o cálculo do
+// salário, considerar que existem duas classes de funcionários, a classe 1, cujo salário é 1,3 vezes o salário de
+// referência, e a classe 2, cujo salário é 1,9 vezes o salário de referência.
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "Ficha.h"

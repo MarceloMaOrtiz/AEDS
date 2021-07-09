@@ -1,3 +1,5 @@
+// Escreva um procedimento recursivo que receba uma string como parâmetro e a exiba invertida.
+
 #include "stdlib.h"
 #include "stdio.h"
 

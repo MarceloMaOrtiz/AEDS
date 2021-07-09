@@ -33,6 +33,7 @@
 #include "ListaSequencial.h"
 #include "ListaDinEncad.h"
 #include "ListaDinEncadDupla.h"
+#include "ListaDinEncadDesc.h"
 
 // $ gcc -g -rdynamic ./test.c -o test
 void handler(int sig) {
@@ -84,7 +85,7 @@ int main(){
     strcpy(dados_aluno.nome, "Marcelo");
     dados_aluno.n1 = 10;
     dados_aluno.n2 = 10;
-    dados_aluno.n2 = 10;
+    dados_aluno.n3 = 10;
     int x;
     x = insere_lista_sequencial_final(ls, dados_aluno);
     x = insere_lista_sequencial_inicio(ls, dados_aluno);
@@ -126,7 +127,7 @@ int main(){
     strcpy(dados_aluno_din.nome, "Marcelo");
     dados_aluno_din.n1 = 10;
     dados_aluno_din.n2 = 10;
-    dados_aluno_din.n2 = 10;
+    dados_aluno_din.n3 = 10;
     ListaDinEncad* ld = cria_lista_din();
     x = insere_lista_din_inicio(ld, dados_aluno_din);
     x = insere_lista_din_fim(ld, dados_aluno_din);
@@ -164,7 +165,7 @@ int main(){
     strcpy(dados_aluno_din_dupla.nome, "Marcelo");
     dados_aluno_din_dupla.n1 = 10;
     dados_aluno_din_dupla.n2 = 10;
-    dados_aluno_din_dupla.n2 = 10;
+    dados_aluno_din_dupla.n3 = 10;
     ListaDinEncadDupla* ldd = cria_lista_din_dupla();
     x = insere_lista_din_dupla_inicio(ldd, dados_aluno_din_dupla);
     x = insere_lista_din_dupla_fim(ldd, dados_aluno_din_dupla);
@@ -176,6 +177,39 @@ int main(){
     x = remove_lista_din_dupla(ldd, dados_aluno_din_dupla);
     libera_lista_din_dupla(ldd);
     printf("\nFim Lista Dinâmica Duplamente Encadeada\n");
+
+    // Lista Encadeada com Nó Descritor
+    //  - Variação da Lista Dinâmica
+    //  - Pode ser utilizado com diversas listas, filas...
+    //  - Utiliza um nó especial chamado de Descritor para armazenar informações sobre a lista
+    //      - Ponteiro para o início
+    //      - Ponteiro para o final
+    //      - Tamanho da lista
+    //      - etc...
+    //  - Nó Descritor substitui o ponteiro para ponteiro que indica o início da lista
+    //  - Vantagens
+    //      - Facilita certas operações
+    //          - Inserção no final não precisa percorrer a lista
+    //  - 3 Tipos de Inserção e Remoção variando com a posição na lista
+    //      - Início
+    //      - Meio
+    //      - Fim
+    //  - 2 Tipos de Consultas
+    //      - Pela posição -> Direta
+    //      - Pelo conteúdo -> Busca
+    struct aluno dados_aluno_din_descritor;
+    dados_aluno_din_descritor.matricula = 123;
+    strcpy(dados_aluno_din_descritor.nome, "Marcelo");
+    dados_aluno_din_descritor.n1 = 10;
+    dados_aluno_din_descritor.n2 = 10;
+    dados_aluno_din_descritor.n3 = 10;
+    ListaDescritor* lnd = cria_lista_descritor();
+    x = insere_lista_descritor_inicio(lnd, dados_aluno_din_descritor);
+    x = insere_lista_descritor_final(lnd, dados_aluno_din_descritor);
+    x = remove_lista_descritor_inicio(lnd);
+    x = remove_lista_descritor_final(lnd);
+    libera_lista_descritor(lnd);
+    printf("\nFim Lista Encadeada com Nó Descritor\n");
 
     printf("\nFim\n");
     return 0;

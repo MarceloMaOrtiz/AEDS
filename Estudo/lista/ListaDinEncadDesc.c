@@ -1,0 +1,108 @@
+//  - Tipo de dados lista
+//  - Tipo de dados descritor
+//  - Implementação das funções
+
+#include "stdlib.h"
+#include "stdio.h"
+#include "aluno.h"
+#include "ListaDinEncadDesc.h"
+
+struct elemento {
+    struct aluno dados;
+    struct elemento *prox;
+};
+typedef struct elemento Elem;
+
+struct descritor{
+    struct elemento *inicio;
+    struct elemento *final;
+    int qtd;
+};
+
+ListaDescritor* cria_lista_descritor() {
+    ListaDescritor* li = (ListaDescritor*)malloc(sizeof(ListaDescritor));
+    if(li != NULL){
+        li->inicio = NULL;
+        li->final = NULL;
+        li->qtd = 0;
+    }
+    return li;
+}
+
+int insere_lista_descritor_inicio(ListaDescritor* li, struct aluno al) {
+    if(li == NULL)
+        return 0;
+    Elem *no = (Elem*)malloc(sizeof(Elem));
+    if(no == NULL)
+        return 0;
+    no->dados = al;
+    no->prox = li->inicio;
+    if(li->inicio == NULL)
+        li->final = no;
+    li->inicio = no;
+    li->qtd++;
+    return 1;
+}
+
+int insere_lista_descritor_final(ListaDescritor* li, struct aluno al) {
+    if(li == NULL)
+        return 0;
+    Elem *no = (Elem*)malloc(sizeof(Elem));
+    if(no == NULL)
+        return 0;
+    no->dados = al;
+    no->prox = NULL;
+    if(li->inicio == NULL)
+        li->inicio = no;
+    li->final->prox = no;
+    li->qtd++;
+    return 1;
+}
+
+int remove_lista_descritor_inicio(ListaDescritor* li) {
+    if(li == NULL)
+        return 0;
+    if(li->inicio == NULL)
+        return 0;
+    Elem *no = li->inicio;
+    li->inicio = no->prox;
+    free(no);
+    if(li->inicio == NULL)
+        li->final = NULL;
+    li->qtd--;
+    return 1;
+}
+
+int remove_lista_descritor_final(ListaDescritor* li) {
+    if(li == NULL)
+        return 0;
+    if(li->inicio == NULL)
+        return 0;
+    Elem *ant, *no = li->inicio;
+    while(no->prox != NULL){
+        ant = no;
+        no = no->prox;
+    }
+    if(no == li->inicio){ // Para remover o primeiro
+        li->inicio = NULL;
+        li->final = NULL;
+    } else{
+        ant->prox = no->prox;
+        li->final = ant;
+    }
+    free(no);
+    li->qtd--;
+    return 1;
+}
+
+void libera_lista_descritor(ListaDescritor* li) {
+    if(li != NULL){
+        Elem* no;
+        while(li->inicio != NULL){
+            no = li->inicio;
+            li->inicio = li->inicio->prox;
+            free(no);
+        }
+        free(li);
+    }
+}

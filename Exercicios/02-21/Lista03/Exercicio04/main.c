@@ -1,3 +1,6 @@
+// Faça um procedimento recursivo que receba um inteiro N e que imprima na tela o valor de N invertido.
+// Ex: 123 – 321
+
 #include "stdlib.h"
 #include "stdio.h"
 

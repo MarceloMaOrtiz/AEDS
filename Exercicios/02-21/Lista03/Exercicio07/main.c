@@ -1,3 +1,6 @@
+// Crie uma função recursiva que calcula e retorna a soma de todos os elementos de um vetor de números reais
+// de tamanho n.
+
 #include "stdlib.h"
 #include "stdio.h"
 

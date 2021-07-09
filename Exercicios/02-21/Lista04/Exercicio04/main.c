@@ -1,3 +1,7 @@
+// Escreva um procedimento na Linguagem C para trocar de posição os elementos m e n de uma lista
+// implementada por ponteiros – lista encadeada (m e n podem ser chaves ou mesmo ponteiros para os
+// elementos, a escolha é sua). Faça um pequeno programa para testar seu procedimento.
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "Lista.h"

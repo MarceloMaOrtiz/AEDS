@@ -1,3 +1,6 @@
+// Escreva uma função recursiva que procure um valor em um vetor e retorne o índice do elemento, caso ele
+// exista no vetor, ou -1 caso, caso contrário.
+
 #include "stdlib.h"
 #include "stdio.h"
 

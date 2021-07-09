@@ -1,3 +1,6 @@
+// Escreva um procedimento na Linguagem C para trocar de posição os elementos de índice i e j de uma lista
+// implementada por vetores. Faça um pequeno programa para testar seu procedimento.
+
 #include "stdlib.h"
 #include "stdio.h"
 #include "Lista.h"

@@ -1,3 +1,9 @@
+// Considere a implementação de listas encadeadas utilizando ponteiros. Escreva um procedimento
+// Troca(TipoLista * pLista, TipoCelula * p) que, dado um ponteiro para uma célula qualquer (p), troca
+// de posição essa célula com a sua célula seguinte da lista, como mostrado na figura abaixo. (Obs.: Não vale
+// trocar apenas o campo item! Você deverá fazer a manipulação dos ponteiros para trocar as duas células de
+// posição). Não esqueça de tratar os casos especiais. Faça um pequeno programa para testar seu procedimento.
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "Lista.h"

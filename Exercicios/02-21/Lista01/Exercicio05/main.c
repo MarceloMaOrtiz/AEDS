@@ -1,3 +1,9 @@
+// Escreva um programa na linguagem C que use alocação dinâmica para criar 2 (duas) disciplinas. Em seguida,
+// peça ao usuário para digitar as informações (nome e matrícula) de vários alunos para cada disciplina. Seu
+// programa deve perguntar se o usuário quer adicionar mais alunos, e se a resposta for positiva, deve alocar
+// espaço dinamicamente para inclusão desse aluno. Por último, o programa deve imprimir na tela as informações
+// das duas disciplinas e dos alunos matriculados nelas.
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "DisciplinaAluno.h"

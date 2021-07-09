@@ -1,3 +1,6 @@
+// Escreva uma função recursiva que retorne o n-ésimo elemento da série de Fibonacci. O número n deve ser
+// informado pelo usuário.
+
 #include "stdlib.h"
 #include "stdio.h"
 

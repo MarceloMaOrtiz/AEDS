@@ -1,3 +1,11 @@
+Implemente um TAD NumeroComplexo. Cada número possui os campos real e imaginário. Implemente as
+operações:
+a) Atribui: atribui valores para os campos
+b) Imprime: imprime o número da forma “R + Ci”
+c) Copia: Copia o valor de um número para outro
+d) Soma: Soma dois números complexos
+Faça um pequeno programa para testar o seu TAD.
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "NumeroComplexo.h"
