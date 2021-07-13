@@ -1,0 +1,3 @@
+struct registro{
+    int key;
+};
