@@ -86,6 +86,42 @@ void selection_sort(int *v, int tam){
     }
 }
 
+// ShellSort
+//  - É uma extensão do InsertionSort
+//  - Contorna um problema do InsertionSort
+//      - No insertion, quando o menor item está na ultima posição, o algoritmo faz n-1 comparações
+//      - No ShellSort, permite a troca de registros mais distantes
+//  - Os itens separados de h posições são rearranjados
+//      - Todo h-esimo item leva a uma sequenção ordenada (Sequência estará h-ordenada)
+//      - Quando h = 1, Shellsort corresponde ao InsertionSort
+//  - Performance
+//      - A eficiência do algoritmo ainda não é conhecida
+//          - Ocorre por conta dos incrementos no h
+//      - Ótima opção para arquivos de tamanho moderado
+//      - Tempo de execução do algoritmo é sensível à ordem incial do arquivo
+//      - Não estável: Altera a ordem de dados iguais
+void shell_sort(int *v, int tam){
+    int i, j, h = 1;
+    int x;
+    do{
+        h = h * 3 + 1;
+    }while(h < tam);
+    do{
+        h = h / 3;
+        for(i = h+1; i <= tam; i++){
+            x = v[i];
+            j = i;
+            while(v[j-h] > x){
+                v[j] == v[j-h];
+                j = j - h;
+                if(j <= h)
+                    break;
+            }
+            v[j] = x;
+        }
+    }while(h != 1);
+}
+
 void imprimir(int *v, int tam){
     printf("\n[");
     for(int i = 0; i < tam; i++)
@@ -113,6 +149,12 @@ int main(){
     imprimir(vetor_selection, 10);
     selection_sort(vetor_selection, 10);
     imprimir(vetor_selection, 10);
+
+    int vetor_shell[10] = {4, 5, 3, 2, 1, 9, 7, 0, 8, 6};
+    printf("\n - ShellSort\n");
+    imprimir(vetor_shell, 10);
+    selection_sort(vetor_shell, 10);
+    imprimir(vetor_shell, 10);
 
     return 0;
 }

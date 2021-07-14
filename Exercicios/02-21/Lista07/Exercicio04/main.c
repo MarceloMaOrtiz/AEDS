@@ -17,23 +17,23 @@ void insertion_sort(float *v, int tam){
     float aux;
     for(i = 1; i < tam; i++){
         aux = v[i];
-        printf("\n%.2f\n", aux);
-        if(j > 0)
-            printf("%.2f\n", v[j-1]);
+        // if(j > 0)
+        //     printf("%.2f\n", v[j-1]);
         for(j = i; (j > 0) && (aux < v[j-1]); j--)
             v[j] = v[j-1];
         v[j] = aux;
     }
 }
 
-void insere_ordenado(float *v, int tam, float *new_v, float num){
+float* insere_ordenado(float *v, int tam, float num){
     int new_tam = tam+1;
     float *new_vetor = (float*)malloc((new_tam)*sizeof(float));
     for(int i = 0; i < tam; i++)
         new_vetor[i] = v[i];
-    new_vetor[new_tam-1] = num;
-    v = new_vetor;
-    insertion_sort(v, tam+1);
+    new_vetor[tam] = num;
+    // imprimir(new_v, tam+1);
+    insertion_sort(new_vetor, tam+1);
+    return new_vetor;
 }
 
 int main(){
@@ -41,7 +41,7 @@ int main(){
     for(int i = 0; i < 4; i++)
         vetor[i] = i + 1;
     imprimir(vetor, 4);
-    insere_ordenado(vetor, 4, vetor, 2.5);
+    vetor = insere_ordenado(vetor, 4, 2.5);
     imprimir(vetor, 5);
     return 0;
 }
