@@ -12,36 +12,28 @@ void imprimir(float *v, int tam){
     printf("]\n");
 }
 
-void insertion_sort(float *v, int tam){
-    int i, j, cont = 0;
-    float aux;
-    for(i = 1; i < tam; i++){
-        aux = v[i];
-        // if(j > 0)
-        //     printf("%.2f\n", v[j-1]);
-        for(j = i; (j > 0) && (aux < v[j-1]); j--)
-            v[j] = v[j-1];
+void InserirOrdenado(float *v, int tam, float n){
+    
+    int i = 0;
+    while(v[i] < n && i < tam-1)
+        i++;
+    float aux = v[i], aux2;
+    for(int j = i+1; j < tam; j++){
+        aux2 = v[j];
         v[j] = aux;
+        aux = aux2;
     }
-}
-
-float* insere_ordenado(float *v, int tam, float num){
-    int new_tam = tam+1;
-    float *new_vetor = (float*)malloc((new_tam)*sizeof(float));
-    for(int i = 0; i < tam; i++)
-        new_vetor[i] = v[i];
-    new_vetor[tam] = num;
-    // imprimir(new_v, tam+1);
-    insertion_sort(new_vetor, tam+1);
-    return new_vetor;
+    v[i] = n;
 }
 
 int main(){
-    float *vetor = (float*)malloc(4*sizeof(float));
-    for(int i = 0; i < 4; i++)
-        vetor[i] = i + 1;
-    imprimir(vetor, 4);
-    vetor = insere_ordenado(vetor, 4, 2.5);
-    imprimir(vetor, 5);
+    float *vet = (float*)malloc(5*sizeof(float));
+    vet[0] = 1;
+    vet[1] = 2;
+    vet[2] = 3;
+    vet[3] = 4;
+    imprimir(vet, 4);
+    InserirOrdenado(vet, 5, 2.5);
+    imprimir(vet, 5);
     return 0;
 }
