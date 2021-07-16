@@ -93,14 +93,14 @@ int main(){
     insertion_sort(vetor_insertion_1, 8);
     printf("\n\t 2- ");
     imprimir(vetor_insertion_2, 12);
-    insertion_sort(vetor_insertion_2, 2);
+    insertion_sort(vetor_insertion_2, 12);
 
     int vetor_selection_1[8] = {15, 3, 4, 19, 26, 7, 9, 11};
     int vetor_selection_2[12] = {20, 19, 17, 15, 14, 12, 11, 9, 7, 4, 2, 1};
     printf("\n c) SelectionSort\n");
     printf("\n\t 1- ");
     imprimir(vetor_selection_1, 8);
-    selection_sort(vetor_selection_1, 10);
+    selection_sort(vetor_selection_1, 8);
     printf("\n\t 2- ");
     imprimir(vetor_selection_2, 12);
     selection_sort(vetor_selection_2, 12);

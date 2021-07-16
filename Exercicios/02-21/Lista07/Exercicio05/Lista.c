@@ -24,12 +24,16 @@ int insere_lista_ordenado(ListaNomes *li, char *nome){
         return 0;
     strcpy(no->nome, nome);
     if((*li) == NULL){
+        printf("\nPRIMEIRO\n");
         no->prox = NULL;
         *li = no;
     }
     else{
         No* no_aux = *li;
         No* no_ant = NULL;
+        printf("\nNOME: %s", nome);
+        printf("\nNO: %s", no_aux->nome);
+        printf("\nCOMP: %d\n", strcmp(nome, no_aux->nome));
         while(no_aux->prox != NULL && strcmp(nome, no_aux->nome) > 0){
             no_ant = no_aux;
             no_aux = no_aux->prox;
@@ -51,8 +55,14 @@ int insere_lista_ordenado(ListaNomes *li, char *nome){
             }
         }
         else{
-            no->prox = no_aux->prox;
-            no_aux->prox = no;
+            if(no_aux == (*li)){
+                no->prox = no_aux;
+                (*li) = no;
+            }
+            else{
+                no->prox = no_aux;
+                no_ant->prox = no;
+            }
         }
     }
     return 1;
