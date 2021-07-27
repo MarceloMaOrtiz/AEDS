@@ -53,3 +53,6 @@ dkms.conf
 
 # Arquivos .~lock
 *.~lock*
+
+# .txt
+dados.txt

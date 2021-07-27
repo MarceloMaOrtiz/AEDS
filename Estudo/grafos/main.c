@@ -82,11 +82,83 @@
 //      - Grafo que possui um ciclo que visita cada aresta apenas uma vez
 //  - Grafo Semi-Euleriano
 //      - Grafo que possui um caminho que visita cada aresta apenas uma vez
+//  - Representação de Grafo (Depende da aplicação)
+//      - Matriz de Adjacência
+//          - Grafo muito conectado
+//          - Matriz N x N
+//              - N -> Número de vértices
+//          - Alto custo computacional
+//              - O(n²)
+//          - Aresta é representado por uma "marca" na posição i,j da matriz
+//      - Lista de Adjacência
+//          - Grafo muito esparso (espalahdo)
+//          - Possui uma Lista, estática ou Dinâmica
+//              - Cada posição da lista representa um vértice
+//              - Cada vértice da lista aponta para todos os vértices que ele tem conexão
+//          - Será utilizado ListaGrafo.c e ListaGrafo.h para representar a Lista
+//  - Busca em Grafo
+//      - Consiste em explorar um grafo
+//      - Processo sistemático de como caminhos por seus Vértices e Arestas
+//      - Depende do vértice inicial
+//      - Pode ser necessário visistar todos os vértices, alguns problemas podem ser
+//          resolvidos visitando apenas um subconjunto dos vértices
+//      - Principais tipos de Busca
+//          - Busca em profundidade
+//              - Partindo de um vértice inicial, é explorado o máximo possível cada um
+//                  dos ramos antes de retroceder ("BackTracking")
+//              - Quando Utilizar
+//                  - Encontrar componentes conectados e fortemente conectados
+//                  - Ordenação topológica de um grafo
+//                  - Resolver quebra-cabeças (ex. Labirinto)
+//          - Busca em Largura
+//              - Partindo de um vértice inicial, é explorado todos os vértices visinhos.
+//                  Em seguida, o processo é repetido para cada vértice vizinho, visitando
+//                  os vértices ainda inexplorados
+//              - Quando Utilizar
+//                  - Achar componentes conectados
+//                  - Achar todos os vértices conectados a apenas 1 componente
+//                  - Achar o menor caminho entre dois vértices
+//                  - Testar Bipartição em Grafos
+//          - Busca pelo Menor Caminho
+//              - Partindo de um vértice inicial, calcula a menor distância desse vértice a
+//                  todos os demais
+//              - Agoritmo de Dijkstra
+//                  - Resolve esse problema para grafos "dirigido" ou "não dirigido" com
+//                      arestas de peso "não negativo"
 
 #include "stdlib.h"
 #include "stdio.h"
+#include "ListaGrafo.h"
 
 int main(){
+    // Grafo *gr;
+    // gr = cria_grafo(10, 7, 0);
+    // insere_aresta(gr, 0, 1, 0, 0);
+    // insere_aresta(gr, 1, 2, 0, 0);
+    // insere_aresta(gr, 2, 5, 0, 0);
+    // insere_aresta(gr, 5, 3, 0, 0);
+    // insere_aresta(gr, 3, 4, 0, 0);
+    // remove_aresta(gr, 3, 4, 0);
+    // remove_aresta(gr, 5, 3, 0);
+    // libera_grafo(gr);
 
+    Grafo *gr;
+    int eh_digrafo = 1;
+    gr = cria_grafo(5, 5, 0);
+    insere_aresta(gr, 0, 1, eh_digrafo, 0);
+    insere_aresta(gr, 1, 3, eh_digrafo, 0);
+    insere_aresta(gr, 1, 2, eh_digrafo, 0);
+    insere_aresta(gr, 2, 4, eh_digrafo, 0);
+    insere_aresta(gr, 3, 0, eh_digrafo, 0);
+    insere_aresta(gr, 3, 4, eh_digrafo, 0);
+    insere_aresta(gr, 4, 1, eh_digrafo, 0);
+    int visita_profundidade[5];
+    busca_profundidade(gr, 0, visita_profundidade);
+    int visita_largura[5];
+    busca_largura(gr, 0, visita_largura);
+    int anterior_menor_caminho[5];
+    float distancia_menor_caminho[5];
+    menor_caminho(gr, 0, anterior_menor_caminho, distancia_menor_caminho);
+    libera_grafo(gr);
     return 0;
 }
