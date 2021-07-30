@@ -60,21 +60,6 @@ int vazia(ArvBin *raiz){
     return 0;
 }
 
-int altura(ArvBin *raiz){
-    if(raiz == NULL){
-        return 0;
-    }
-    if(*raiz == NULL){
-        return 0;
-    }
-    int alt_esq = altura(&((*raiz)->esq));
-    int alt_dir = altura(&((*raiz)->dir));
-    if(alt_esq > alt_dir)
-        return (alt_esq + 1);
-    else
-        return (alt_dir + 1);
-}
-
 int balanceada(ArvBin *raiz, int *height){
     int lh = 0, rh = 0;
     int l = 0, r = 0;

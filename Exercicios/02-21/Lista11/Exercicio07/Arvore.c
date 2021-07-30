@@ -68,7 +68,6 @@ int simetrica(ArvBin *raiz1, ArvBin *raiz2){
     if(*raiz1 && *raiz2 && (*raiz1)->info == (*raiz2)->info){
         return simetrica(&((*raiz1)->esq), &((*raiz1)->dir)) && simetrica(&((*raiz1)->dir), &((*raiz1)->esq));
     }
-    printf("UM 0");
     return 0;
 }
 

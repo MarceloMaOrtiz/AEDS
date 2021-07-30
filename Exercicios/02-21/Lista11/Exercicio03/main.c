@@ -38,7 +38,7 @@ int main(){
     if(p_balanceada == 1)
         printf("  c) Perfeitamente Balanceada\n");
     else
-        printf("  b) Não Perfeitamente Balanceada\n");
+        printf("  c) Não Perfeitamente Balanceada\n");
 
     liberar(raiz);
     return 0;
