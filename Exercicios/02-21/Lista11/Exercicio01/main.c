@@ -29,25 +29,54 @@ void pre_ordem(int arv[], int tam){
 
 void pos_ordem(int arv[], int tam){
     Pilha *pi = criar();
-    int i = 0, dir, esq, print = 0;
+    int atual = 0, ant = -1;
     printf("\n[ ");
-    inserir(pi, i);
-    do{
-        while(i < tam){
-            esq = i*2 + 1;
-            dir = i*2 + 2;
-            if(esq < tam)
-                inserir(pi, esq);
-            if(dir < tam)
-                inserir(pi, dir);
-            i = esq;
-            
+    while(atual != -1 || !vazia(pi)){
+        if(atual != -1){
+            inserir(pi, atual);
+            atual = atual * 2 + 1;
+            if(atual >= tam)
+                atual = -1;
         }
-        consultar(pi, &i);
-        printf("%d, ", arv[i]);
-        remover(pi);
-    }while(!vazia(pi));
-    printf("%d, ", arv[0]);
+        else{
+            consultar(pi, &atual);
+            int dir = atual * 2 + 2;
+            if(dir >= tam)
+                dir = -1;
+            if(dir == -1 || dir == ant){
+                printf("%d, ", arv[atual]);
+                remover(pi);
+                ant = atual;
+                atual = -1;
+            }else
+                atual = dir;
+        }
+    }
+    printf("]\n\n");
+    liberar(pi);
+}
+
+void central(int arv[], int tam){
+    Pilha *pi = criar();
+    int atual = 0;
+    printf("\n[ ");
+    while(1){
+        if(atual != -1){
+            inserir(pi, atual);
+            atual = atual * 2 + 1;
+            if(atual >= tam)
+                atual = -1;
+        }else{
+            if(vazia(pi))
+                break;
+            consultar(pi, &atual);
+            remover(pi);
+            printf("%d, ", arv[atual]);
+            atual = atual * 2 + 2;
+            if(atual >= tam)
+                atual = -1;
+        }
+    }
     printf("]\n\n");
     liberar(pi);
 }
@@ -58,6 +87,8 @@ int main(){
     pre_ordem(arvore_vetor, 9);
     printf("\n### Pos-Ordem ###\n");
     pos_ordem(arvore_vetor, 9);
+    printf("\n### Central ###\n");
+    central(arvore_vetor, 9);
     return 0;
 }
 
