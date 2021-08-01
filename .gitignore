@@ -56,3 +56,9 @@ dkms.conf
 
 # .txt
 dados.txt
+
+# .odt
+*.odt
+
+# .pdf
+*.pdf
