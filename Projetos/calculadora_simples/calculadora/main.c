@@ -31,9 +31,6 @@ void handler(int sig) {
 //      Portanto para o pior caso temos o comportamento O(n*log(n)).
 int main(){
     signal(SIGSEGV, handler);
-    printf("########## TRABALHO 1 AEDS ##########\n");
-    printf("# ALUNO: Guilherme Machado Pacheco #\n");
-    printf("###### MATRICULA: NOME COMPLETO #####\n");
 
     Pilha *pilha;
     pilha = criar_pilha(pilha);
