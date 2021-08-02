@@ -18,14 +18,14 @@ Pilha *criar_pilha(){
 
 // Complexidade: O(1)
 // Consulta o topo da Pilha, armazenando o valor em uma variável inteira
-void consulta_pilha(Pilha *pi, int *elem){
-    if(pi == NULL)
+    void consulta_pilha(Pilha *pi, int *elem){
+        if(pi == NULL)
+            return;
+        if((*pi) == NULL)
+            return;
+        *elem = (*pi)->elem;
         return;
-    if((*pi) == NULL)
-        return;
-    *elem = (*pi)->elem;
-    return;
-}
+    }
 
 // Complexidade: O(1)
 // Remove e libera o topo da pilha
@@ -80,6 +80,9 @@ void empilhar_pilha(Pilha *pi, char elem){
                     resultado = topo_x / topo_y;
                 }else{
                     printf("\n\nError. Impossível efetuar divisão por 0.\n\n");
+                    while(*pi != NULL){
+                        desempilhar_pilha(pi);
+                    };
                     return;
                 }
             }

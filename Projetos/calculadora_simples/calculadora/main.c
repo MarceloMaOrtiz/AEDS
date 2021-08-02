@@ -31,18 +31,18 @@ void handler(int sig) {
 //      Portanto para o pior caso temos o comportamento O(n*log(n)).
 int main(){
     signal(SIGSEGV, handler);
-    printf("####### TRABALHO 1 AEDS #######\n");
-    printf("#### ALUNO: NOME COMPLETO ####\n");
-    printf("### MATRICULA: NOME COMPLETO ##\n");
+    printf("########## TRABALHO 1 AEDS ##########\n");
+    printf("# ALUNO: Guilherme Machado Pacheco #\n");
+    printf("###### MATRICULA: NOME COMPLETO #####\n");
 
     Pilha *pilha;
     pilha = criar_pilha(pilha);
     char *equacao, *posfixa;
     equacao = (char*)malloc(100*sizeof(char));
     do{
-        printf("\n###############################\n");
-        printf("##### CALCULADORA SIMPLES #####\n");
-        printf("###############################\n\n");
+        printf("\n#####################################\n");
+        printf("######## CALCULADORA SIMPLES ########\n");
+        printf("#####################################\n\n");
         printf("Insira a equação no formato Infixo.\n");
         printf("Sempre comece com '(' e Encerre com ')'.\n");
         printf("Insira C/c para Limpar a Pilha da Calculadora.\n");
@@ -66,7 +66,8 @@ int main(){
                 }
             }
         }
-    }while(equacao[0] != 'S' || equacao[0] != 's');
+        printf("%c", equacao[0]);
+    }while(equacao[0] != 'S' && equacao[0] != 's');
     liberar_pilha(pilha);
     free(equacao);
     free(posfixa);
