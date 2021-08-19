@@ -252,7 +252,7 @@ void heap_sort(int *vet, int n){
         aux = vet[0];
         vet[0] = vet[i];
         vet[i] = aux;
-        criaHeap(vet, 0, i-1);
+        cria_heap(vet, 0, i-1);
     }
 }
 
