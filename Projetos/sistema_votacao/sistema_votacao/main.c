@@ -30,18 +30,33 @@ void clean_fgets(char word[]){
 int main(){
     ArvoreEleitor* arvore;
     arvore = criaArvore();
-    int opcao;
+    int opcao; // Utilizado pelo menu para controlar a opcao
+
+    // titulo = Usuário que está utilizando; voto = Titulo de quem está recebendo o voto
+    int titulo, voto; 
+    char nome[50];
+    int verificador = 0; // Utilizado para verificar se as funções foram executadas corretamente
+
+    insereArvore(arvore, 1, "Marcelo");
+    insereArvore(arvore, 2, "Teste");
+    insereArvore(arvore, 3, "Sama");
+    insereArvore(arvore, 4, "Ravena");
+    insereArvore(arvore, 5, "Wallace");
+    insereArvore(arvore, 6, "Gustavo");
+    insereArvore(arvore, 7, "Wandneia");
+    insereArvore(arvore, 8, "Che");
+    insereArvore(arvore, 9, "Mateus");
 
     printf("-------------------------------\n");
     printf("------ Trabalho 2 - AEDS ------\n");
-    printf("---- Mateus ----\n");
+    printf("------------ Mateus ------------\n");
     printf("-------------------------------\n\n");
     printf("-------------------------------\n");
     printf("----- Sistema de Votacao -----\n");
-    printf("-------------------------------\n\n");
+    printf("-------------------------------\n");
 
     do{
-        printf("----------- MENU -----------\n\n");
+        printf("\n----------- MENU -----------\n\n");
         printf("\t1. Cadastrar um titulo\n");
         printf("\t2. Descadastrar um titulo\n");
         printf("\t3. Iniciar nova votacao\n");
@@ -53,10 +68,9 @@ int main(){
         printf(" Opcao: ");
         scanf("%d", &opcao);
         printf("\n\n");
+    
         switch(opcao){
-            int titulo, voto;
-            char nome[50];
-            int verificador = 0;
+            
             case 1:
                 // system("cls"); // Windows
                 system("clear"); // Linux

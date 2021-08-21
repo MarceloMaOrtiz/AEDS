@@ -9,7 +9,7 @@ typedef struct No_Est* ArvoreEleitor;
 ArvoreEleitor* criaArvore();
 
 // Função responsável por inserir eleitor na árvore
-int insereArvore(ArvoreEleitor* raiz, int titulo, char nome);
+int insereArvore(ArvoreEleitor* raiz, int titulo, char nome[]);
 
 // Função responsável por remover um eleitor da árvore
 int removeEleitorArvore(ArvoreEleitor* raiz, int titulo);
@@ -21,7 +21,7 @@ int novaVotacao(ArvoreEleitor* raiz);
 int votar(ArvoreEleitor* raiz, int titulo, int voto);
 
 // Função responsável por remover voto de determinado eleitor
-int retiraVoto(ArvoreEleitor* raiz, int titulo);
+int retirarVoto(ArvoreEleitor* raiz, int titulo);
 
 // Função responsável por imprimir em ordem decrescente o resultado parcial
 void resultadoParcial(ArvoreEleitor* raiz);
