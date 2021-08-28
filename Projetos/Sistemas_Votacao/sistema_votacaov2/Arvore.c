@@ -183,6 +183,10 @@ Info* busca(No** raiz, int titulo){
 }
 
 void votar(No** raizTitulos, No** raizVotos, int titulo, int voto){
+    if(titulo == voto){
+        printf("\n  Não é possível votar em você mesmo...\n");
+        return;
+    }
     Info* eleitor = busca(raizTitulos, titulo);
     if(eleitor == NULL){
         printf("\n  Eleitor não cadastrado...\n");
@@ -249,7 +253,7 @@ void remover_voto(No** raiz, int titulo){
         else
             aux = aux->dir;
     }
-    printf("\n  Eleitor não encontrado...\n");
+    printf("\n  Eleitor ainda não votou...\n");
     return;
 }
 

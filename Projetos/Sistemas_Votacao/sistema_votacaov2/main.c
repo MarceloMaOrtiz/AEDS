@@ -49,15 +49,14 @@ int main(){
     int titulo, voto;
     char nome[50];
 
-    cadastrar(arvoreTitulos, 1, "Marcelo");
-    cadastrar(arvoreTitulos, 2, "Sama");
-    cadastrar(arvoreTitulos, 3, "Gustavo");
-    cadastrar(arvoreTitulos, 4, "Ravena");
-    cadastrar(arvoreTitulos, 5, "Wandneia");
-    cadastrar(arvoreTitulos, 6, "Wallace");
-    cadastrar(arvoreTitulos, 7, "Robo");
-    cadastrar(arvoreTitulos, 8, "Tainá");
-    cadastrar(arvoreTitulos, 9, "Mamba");
+    cadastrar(arvoreTitulos, 1, "Luisa");
+    cadastrar(arvoreTitulos, 2, "João");
+    cadastrar(arvoreTitulos, 3, "Samuel");
+    cadastrar(arvoreTitulos, 4, "Julia");
+    cadastrar(arvoreTitulos, 5, "Aloísio");
+    cadastrar(arvoreTitulos, 6, "Renato");
+    cadastrar(arvoreTitulos, 7, "Lia");
+    cadastrar(arvoreTitulos, 8, "Moura");
 
     do{
         printf("\n  Menu\n");
