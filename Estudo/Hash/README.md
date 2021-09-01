@@ -228,7 +228,7 @@ Hash
                              - Custo de inserção se torna O(n) quando todos os elementos
                                  inseridos colidem
                          - Implementação
-                             - Existem três abordagens
+                             - Três abordagens
                                  - Sondagem Linear - Tentatica Linear - rehash Linear
                                      - Tenta espalhar os elementos de forma sequencial
                                          a partir da posição calculada utilizando a
@@ -247,9 +247,50 @@ Hash
                                              - Quanto maior o agrupamento primário, maior
                                                  a probabilidade de aumentá-lo, diminuindo
                                                  o desempenho
-                                 - Sondagem Quadrática
-                                     - 
-                                 - Duplo Hash
+                                 - Sondagem Quadrática - Tentativa Quadrática - rehash quadrático
+                                     - Tenta espalhar os elementos utilizando um equação do
+                                         2º grau
+                                         - pos + (c1 * i) + (c2 * i²)
+                                             - pos -> posição obtida pela tabela hash
+                                             - i -> tentativa atual
+                                             - c1, c2 -> coeficientes da equação
+                                     - Funcionamento
+                                         - Primeiro elemento é colocado na pos
+                                         - Segundo elemento (colisão) é colocado na pos
+                                             gerada a partir da equação de 2º grau
+                                     - Problema
+                                         - Resolve o problema do agrupamento primário
+                                         - Gera o Agrupamento Secundário
+                                             - Ocorre pois as chaves produzem as mesmas
+                                                 posições na sondagem quadrática
+                                     - A degradação na tabela é menor que a produziada
+                                         no agrupamento primário
+                                 - Duplo Hash - Espalahamento Duplo
+                                     - Tenta espalhar os elementos utilizando duas
+                                         funções de hashing
+                                         - H1 + i * H2
+                                             - H1 -> Utilizada para calcular a posição
+                                                 inicial
+                                             - H2 -> Utilizada para calcular os deslocamentos
+                                                 em relação a posição inicial
+                                     - Funcionamento
+                                         - Primeiro elemento é colocado na posição obtida
+                                             por H1
+                                         - Segunda elemento (colisão) é colocado na posição
+                                             obtida a partir da função acima
+                                     - Diminui a ocorrência de agrupamentos
+                                         - Metodo bom para tratar colisões em Endereçamento
+                                             aberto
+                                     - Cuidado
+                                         - Necessário duas funções hashings distintas
+                                         - A segunda função não pode resultar em um valor
+                                             igual a 0, pois não haveria deslocamento
+                                             - Loop Infinito
+                                     - Dica
+                                         - Usar um tamanho de tabela um pouco menor na segunda
+                                             função
+                                         - Somar +1 ao valor da posição obtida na segunda função
+                                             - Evitando assim o 0
                      - Endereçamento Separado - Separate Chaining
                          - Não procura por posições vagas dentro da tabela hash
                          - Armazena dentro de cada posição do array o início de uma
@@ -261,3 +302,15 @@ Hash
                                  dentro da lista procurando aquele elemento
                              - Maior consumo de memória
                                  - É preciso armazenar os ponteiros da lista
+         - Inserção e Busca Com Colisão
+             - Inserção
+                 - Calcular a posição da chave no array
+                 - Recalcular a posição enquanto houver colisão
+                     - Limitar o número de tentativas
+                 - Alocar espaço para os dados
+                 - Armazenar os dados na posição calculada
+             - Busca
+                 - Calcular a posição da chave no array
+                 - Verificar se há dados na posição e se os dados combinam com a chave
+                 - Recalcular a posição enquanto os dados forem diferentes da chave
+                 - Retornar os dados
