@@ -37,6 +37,7 @@
 *.hex
 
 # Debug files
+# JASUDFJ
 *.dSYM/
 *.su
 *.idb

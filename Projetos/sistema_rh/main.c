@@ -68,7 +68,7 @@ int main(){
         printf(" ####################################################\n");
         printf(" ####  Trabalho Algoritmo e Estrutura de Dados  #####\n");
         printf(" ####################################################\n\n");
-        printf(" Bem vindo ao Sistema de RH do Elielson.\n\n");
+        printf(" Bem vindo ao Sistema de RH.\n\n");
         printf(" Função do Software é gerenciar os Funcionários.\n\n");
         printf(" ####################################################\n");
         printf(" ######################  MENU  ######################\n");
@@ -232,7 +232,6 @@ int main(){
                 system("clear"); // Linux
                 printf("\n\tObrigado por utilizar o sistema.\n");
                 printf("\n\tEspero que tenha gostado.\n");
-                printf("\n\tElielson Batista Oliveira.\n\n");
                 break;
             case 9:
                 system("clear"); // Linux
